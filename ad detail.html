@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+<title>Ad Detail — Easyraabta.com</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Easy<span>Raabta</span></a>
+    <div class="nav-actions" style="margin-left:auto;gap:14px;">
+      <button onclick="toggleFav()" id="favBtn" style="font-size:22px;line-height:1;">🤍</button>
+      <button onclick="shareAd()" style="font-size:20px;line-height:1;">🔗</button>
+    </div>
+  </div>
+</nav>
+
+<!-- IMAGE -->
+<div class="img-slider" id="adImage" style="font-size:96px;background:var(--primary-light);">📱</div>
+
+<!-- MAIN CONTENT -->
+<div style="background:#fff;padding:16px;margin-bottom:8px;">
+  <div class="detail-price" id="adPrice">Rs 3,50,000</div>
+  <div class="detail-title" id="adTitle">iPhone 15 Pro Max 256GB</div>
+  <div class="detail-meta" style="margin-top:8px;">
+    <span>📍 <span id="adLoc">Lahore</span></span>
+    <span>🕐 <span id="adTime">2 hours ago</span></span>
+    <span>👁️ 284 views</span>
+  </div>
+</div>
+
+<!-- DESCRIPTION -->
+<div style="background:#fff;padding:16px;margin-bottom:8px;">
+  <h3 style="font-size:16px;font-weight:700;margin-bottom:10px;">Description</h3>
+  <div class="detail-desc" id="adDesc">
+    This is a brand new iPhone 15 Pro Max 256GB in Natural Titanium color. Purchased from Apple Store Dubai. Box open only. Complete accessories included. Exchange possible with iPhone 14 Pro Max only. Serious buyers contact only. No time wasters please.
+  </div>
+</div>
+
+<!-- DETAILS TABLE -->
+<div style="background:#fff;padding:16px;margin-bottom:8px;">
+  <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">Details</h3>
+  <div id="adDetails" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- SAFETY -->
+<div style="background:#fff3e0;border-radius:var(--radius);margin:0 12px 12px;padding:14px;">
+  <h4 style="color:var(--accent);font-size:14px;font-weight:700;margin-bottom:6px;">⚠️ Safety Tips</h4>
+  <ul style="color:#7b5e2a;font-size:13px;line-height:1.8;padding-left:16px;list-style:disc;">
+    <li>Meet in a public place</li>
+    <li>Never pay in advance</li>
+    <li>Inspect before payment</li>
+    <li>Beware of scams</li>
+  </ul>
+</div>
+
+<!-- SELLER -->
+<div class="seller-card">
+  <div class="chat-avatar" style="font-size:28px;">👤</div>
+  <div class="seller-info">
+    <h4 id="sellerName">Ahmed Khan</h4>
+    <p>⭐ 4.8 · Member since 2021</p>
+    <p>📦 32 active ads</p>
+  </div>
+  <a href="profile.html" style="font-size:13px;font-weight:700;color:var(--primary);">View Profile</a>
+</div>
+
+<!-- RELATED ADS -->
+<div class="section" style="padding-bottom:100px;">
+  <div class="section-head"><h2>Similar Ads</h2></div>
+  <div class="ad-scroll" id="relatedAds"></div>
+</div>
+
+<!-- ACTION BAR -->
+<div class="action-bar">
+  <a href="chat.html" class="btn-chat">💬 Chat</a>
+  <a href="tel:+923001234567" class="btn-call">📞 Call</a>
+</div>
+
+<script>
+const ADS = [
+  {id:0,emoji:'📱',title:'iPhone 15 Pro Max 256GB',price:'Rs 3,50,000',loc:'Lahore',time:'2h ago',desc:'Brand new iPhone 15 Pro Max 256GB Natural Titanium. Box open only with all accessories.',details:{Brand:'Apple',Model:'iPhone 15 Pro Max',Storage:'256 GB',Color:'Natural Titanium',Condition:'Open Box'},seller:'Ahmed Khan'},
+  {id:1,emoji:'🚗',title:'Toyota Corolla 2020',price:'Rs 45,00,000',loc:'Karachi',time:'1h ago',desc:'Corolla Altis X 2020 model, 1st owner, 47000 km driven. Total genuine, no accidents, full documents.',details:{Brand:'Toyota',Model:'Corolla Altis X',Year:'2020',Km:'47,000',Transmission:'Automatic'},seller:'Bilal Raza'},
+  {id:2,emoji:'🏠',title:'3BHK Apartment DHA Phase 6',price:'Rs 2,20,00,000',loc:'Islamabad',time:'3h ago',desc:'Luxurious 3 bedroom apartment on 7th floor with stunning views. Modern kitchen, servant quarter, 2 car parking.',details:{Type:'Apartment',Bedrooms:'3',Bathrooms:'2',Area:'1800 sqft',Floor:'7th'},seller:'Asim Mughal'},
+];
+
+const params = new URLSearchParams(location.search);
+const id = parseInt(params.get('id')) || 0;
+const ad = ADS[id] || ADS[0];
+
+document.getElementById('adImage').textContent = ad.emoji;
+document.getElementById('adPrice').textContent = ad.price;
+document.getElementById('adTitle').textContent = ad.title;
+document.getElementById('adLoc').textContent = ad.loc;
+document.getElementById('adTime').textContent = ad.time;
+document.getElementById('adDesc').textContent = ad.desc;
+document.getElementById('sellerName').textContent = ad.seller;
+document.title = ad.title + ' — Easyraabta.com';
+
+const dets = ad.details || {};
+document.getElementById('adDetails').innerHTML = Object.entries(dets).map(([k,v])=>
+  `<div style="background:var(--bg);border-radius:8px;padding:10px;">
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px;">${k}</div>
+    <div style="font-size:14px;font-weight:700;">${v}</div>
+  </div>`
+).join('');
+
+// Related
+const related = ADS.filter(a=>a.id!==id);
+document.getElementById('relatedAds').innerHTML = related.map(a=>
+  `<a href="ad-detail.html?id=${a.id}" class="ad-card">
+    <div style="height:120px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:48px;">${a.emoji}</div>
+    <div class="ad-body">
+      <div class="ad-price">${a.price}</div>
+      <div class="ad-title">${a.title}</div>
+      <div class="ad-meta">📍 ${a.loc}</div>
+    </div>
+  </a>`
+).join('');
+
+let fav = false;
+function toggleFav(){
+  fav = !fav;
+  document.getElementById('favBtn').textContent = fav ? '❤️' : '🤍';
+}
+function shareAd(){
+  if(navigator.share) navigator.share({title:ad.title,url:location.href});
+  else alert('Link copied! ' + location.href);
+}
+</script>
+</body>
+</html>

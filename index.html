@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+<meta name="description" content="Easyraabta - Buy and Sell for free anywhere in Pakistan."/>
+<meta name="theme-color" content="#23d2b5"/>
+<title>Easyraabta.com — Buy & Sell in Pakistan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@500;700;800&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-tap-highlight-color:transparent;scroll-behavior:smooth;}
+body{font-family:'Hind Siliguri',sans-serif;background:#f0f2f5;color:#1a1a2e;font-size:15px;min-height:100vh;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+input,select{font-family:inherit;}
+
+/* ===== CSS VARIABLES ===== */
+:root{
+  --green:#23d2b5;
+  --green-dark:#1aaa94;
+  --green-xdark:#0d7a6a;
+  --orange:#f97316;
+  --orange-dark:#ea6c0a;
+  --navy:#0f2137;
+  --navy2:#1a3552;
+  --bg:#f0f2f5;
+  --white:#ffffff;
+  --border:#e4e8ee;
+  --text:#1a1a2e;
+  --muted:#6b7a8d;
+  --card-r:14px;
+  --nav-h:56px;
+}
+
+/* ===== TOP NAV ===== */
+.topnav{
+  position:sticky;top:0;z-index:200;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  height:var(--nav-h);
+}
+.topnav-inner{
+  display:flex;align-items:center;
+  padding:0 14px;height:100%;gap:10px;
+  max-width:1280px;margin:0 auto;
+}
+.logo-wrap{
+  display:flex;align-items:center;gap:0;flex-shrink:0;
+  text-decoration:none;
+}
+.logo-box{
+  background:var(--green);
+  border-radius:10px;
+  padding:5px 10px;
+  font-family:'Baloo Bhai 2',cursive;
+  font-size:17px;font-weight:800;
+  color:#fff;letter-spacing:-.5px;
+  line-height:1.2;
+}
+.logo-box span{color:var(--navy);}
+/* spacer links — Motors / Property style */
+.nav-links{display:flex;align-items:center;gap:0;flex-shrink:0;}
+.nav-link{
+  display:flex;align-items:center;gap:5px;
+  padding:0 10px;height:var(--nav-h);
+  font-size:13px;font-weight:600;color:var(--text);
+  border-bottom:3px solid transparent;
+  transition:color .2s,border-color .2s;
+  white-space:nowrap;
+}
+.nav-link:hover,.nav-link.active{color:var(--green-dark);border-bottom-color:var(--green);}
+.nav-link img,.nav-link .nl-icon{width:22px;height:22px;object-fit:contain;font-size:18px;}
+
+/* right icons */
+.nav-right{display:flex;align-items:center;gap:4px;margin-left:auto;flex-shrink:0;}
+.nav-icon-btn{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;color:var(--muted);
+  transition:background .2s;position:relative;
+}
+.nav-icon-btn:hover{background:var(--bg);}
+.nav-badge{
+  position:absolute;top:5px;right:5px;
+  background:var(--orange);color:#fff;
+  border-radius:99px;font-size:9px;font-weight:800;
+  width:16px;height:16px;display:flex;align-items:center;justify-content:center;
+}
+.btn-sell-top{
+  display:flex;align-items:center;gap:5px;
+  background:var(--white);color:var(--green-dark);
+  border:2px solid var(--green);border-radius:99px;
+  padding:7px 16px;font-size:13px;font-weight:800;
+  transition:all .2s;white-space:nowrap;
+  font-family:'Baloo Bhai 2',cursive;
+  letter-spacing:.2px;
+}
+.btn-sell-top:hover{background:var(--green);color:#fff;}
+.btn-sell-top .plus{font-size:16px;line-height:1;}
+
+/* ===== SEARCH BAR ROW ===== */
+.search-row{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:10px 14px;
+}
+.search-inner{
+  display:flex;gap:8px;max-width:1280px;margin:0 auto;
+  align-items:center;
+}
+.loc-select{
+  display:flex;align-items:center;gap:6px;
+  border:1.5px solid var(--border);border-radius:8px;
+  padding:0 12px;height:46px;background:#fff;
+  cursor:pointer;flex-shrink:0;min-width:0;
+  max-width:150px;
+}
+.loc-select .loc-pin{font-size:16px;color:var(--green);}
+.loc-select select{
+  border:none;outline:none;background:transparent;
+  font-size:13px;font-weight:600;color:var(--text);
+  cursor:pointer;max-width:90px;
+}
+.search-box{
+  flex:1;display:flex;align-items:center;
+  border:1.5px solid var(--border);border-radius:8px;
+  overflow:hidden;height:46px;background:#fff;
+}
+.search-box input{
+  flex:1;border:none;outline:none;padding:0 14px;
+  font-size:15px;color:var(--text);background:transparent;
+}
+.search-box input::placeholder{color:var(--muted);}
+.search-btn{
+  background:var(--navy);color:#fff;
+  height:100%;padding:0 20px;
+  display:flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:700;
+  flex-shrink:0;border-radius:0 7px 7px 0;
+  font-family:'Baloo Bhai 2',cursive;
+  letter-spacing:.3px;
+}
+.search-btn svg{width:18px;height:18px;}
+
+/* ===== CATEGORY QUICKLINKS ===== */
+.cat-quicklinks{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.cat-ql-inner{
+  display:flex;align-items:center;
+  overflow-x:auto;gap:0;
+  -webkit-overflow-scrolling:touch;
+  max-width:1280px;margin:0 auto;
+  padding:0 8px;
+}
+.cat-ql-inner::-webkit-scrollbar{display:none;}
+.ql-all{
+  display:flex;align-items:center;gap:4px;
+  padding:0 14px;height:44px;font-size:13px;font-weight:700;
+  color:var(--text);border-right:1px solid var(--border);
+  flex-shrink:0;white-space:nowrap;cursor:pointer;
+}
+.ql-all svg{width:14px;height:14px;}
+.ql-link{
+  padding:0 14px;height:44px;display:flex;align-items:center;
+  font-size:13px;font-weight:500;color:var(--text);
+  white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;
+}
+.ql-link:hover{color:var(--green-dark);border-bottom-color:var(--green);}
+
+/* ===== HERO BANNER ===== */
+.hero-banner{
+  margin:14px;border-radius:var(--card-r);overflow:hidden;
+  height:160px;position:relative;
+  background:linear-gradient(135deg,#0f4c75 0%,#1b6ca8 40%,#23d2b5 100%);
+  box-shadow:0 4px 20px rgba(0,0,0,.12);
+  animation:fadeUp .5s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.hero-content{
+  position:absolute;inset:0;padding:18px 20px;
+  display:flex;flex-direction:column;justify-content:center;z-index:2;
+}
+.hero-eyebrow{
+  font-size:11px;font-weight:700;
+  color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1.5px;
+  margin-bottom:4px;
+}
+.hero-title{
+  font-family:'Baloo Bhai 2',cursive;
+  font-size:22px;font-weight:800;color:#fff;line-height:1.2;
+  margin-bottom:8px;
+}
+.hero-title span{color:#ffdb70;}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--orange);color:#fff;
+  border-radius:99px;padding:8px 18px;
+  font-size:13px;font-weight:700;width:fit-content;
+  font-family:'Baloo Bhai 2',cursive;
+}
+.hero-deco{
+  position:absolute;right:-10px;bottom:0;top:0;
+  display:flex;align-items:flex-end;
+  font-size:100px;line-height:1;opacity:.18;
+  pointer-events:none;z-index:1;
+}
+/* Banner dots indicator */
+.banner-dots{
+  display:flex;justify-content:center;gap:6px;padding:8px 0 4px;
+}
+.banner-dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .3s;}
+.banner-dot.active{background:var(--green);width:20px;border-radius:4px;}
+
+/* ===== MAIN CATEGORY GRID ===== */
+.section-wrap{padding:0 14px 14px;max-width:1280px;margin:0 auto;}
+.sec-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 0 10px;
+}
+.sec-head h2{
+  font-family:'Baloo Bhai 2',cursive;font-size:18px;font-weight:700;
+}
+.sec-see-all{font-size:13px;font-weight:700;color:var(--green-dark);}
+
+.cat-grid-main{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+.cat-item{
+  background:var(--white);border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;
+  padding:14px 8px 12px;
+  box-shadow:0 1px 6px rgba(0,0,0,.06);
+  cursor:pointer;transition:transform .18s,box-shadow .18s;
+  text-decoration:none;color:var(--text);
+  animation:fadeUp .45s ease both;
+}
+.cat-item:hover,.cat-item:active{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.10);}
+.cat-img-wrap{
+  width:54px;height:54px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:9px;font-size:30px;
+  position:relative;overflow:hidden;
+}
+.cat-item p{
+  font-size:11.5px;font-weight:600;text-align:center;line-height:1.3;
+  color:var(--text);
+}
+
+/* ===== FEATURED ADS STRIP ===== */
+.ads-strip{
+  display:flex;gap:10px;overflow-x:auto;padding:2px 0 8px;
+  -webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;
+}
+.ads-strip::-webkit-scrollbar{height:3px;}
+.ads-strip::-webkit-scrollbar-thumb{background:var(--green);border-radius:3px;}
+.ad-card{
+  flex-shrink:0;width:170px;
+  background:var(--white);border-radius:12px;
+  overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.07);
+  scroll-snap-align:start;transition:transform .18s;
+  cursor:pointer;display:block;color:var(--text);
+  text-decoration:none;
+}
+.ad-card:hover{transform:translateY(-2px);}
+.ad-thumb{
+  width:100%;height:120px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:46px;
+  background:#f6f8fb;position:relative;
+}
+.ad-thumb .ad-fav{
+  position:absolute;top:7px;right:7px;
+  background:rgba(255,255,255,.9);border-radius:50%;
+  width:26px;height:26px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;
+}
+.ad-body{padding:9px 10px 10px;}
+.ad-price{font-family:'Baloo Bhai 2',cursive;font-size:16px;font-weight:700;color:var(--green-xdark);}
+.ad-title{font-size:12.5px;font-weight:600;margin:2px 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ad-loc{font-size:11px;color:var(--muted);}
+
+/* ===== PROMO STRIP ===== */
+.promo-strip{
+  display:flex;gap:10px;padding:0 14px 14px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.promo-strip::-webkit-scrollbar{display:none;}
+.promo-card{
+  flex-shrink:0;border-radius:12px;padding:16px;
+  min-width:240px;display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:0 2px 12px rgba(0,0,0,.09);
+}
+.promo-card h3{font-family:'Baloo Bhai 2',cursive;font-size:17px;font-weight:700;color:#fff;margin-bottom:4px;}
+.promo-card p{font-size:12px;color:rgba(255,255,255,.8);margin-bottom:14px;}
+.promo-card a{
+  display:inline-block;background:#fff;
+  border-radius:99px;padding:7px 16px;
+  font-size:12px;font-weight:800;font-family:'Baloo Bhai 2',cursive;
+}
+
+/* ===== BOTTOM FIXED NAV ===== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:300;
+  background:var(--white);border-top:1px solid var(--border);
+  display:flex;height:58px;
+  box-shadow:0 -4px 20px rgba(0,0,0,.08);
+  max-width:100%;
+}
+.bn-item{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;
+  font-size:10px;font-weight:600;color:var(--muted);
+  text-decoration:none;transition:color .2s;
+  position:relative;
+}
+.bn-item.active,.bn-item:hover{color:var(--green-xdark);}
+.bn-item svg{width:22px;height:22px;}
+.bn-sell{
+  flex:1;display:flex;align-items:center;justify-content:center;
+}
+.bn-sell a{
+  width:50px;height:50px;border-radius:50%;
+  background:var(--orange);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1px;font-size:9px;font-weight:800;
+  margin-top:-18px;box-shadow:0 4px 18px rgba(249,115,22,.4);
+  font-family:'Baloo Bhai 2',cursive;
+  text-decoration:none;
+}
+.bn-sell svg{width:20px;height:20px;}
+.bn-dot{
+  position:absolute;top:8px;right:calc(50% - 14px);
+  background:var(--orange);width:7px;height:7px;border-radius:50%;
+}
+
+/* ===== FOOTER ===== */
+.site-footer{
+  background:var(--navy);padding:24px 14px 80px;
+  font-size:13px;
+}
+.footer-logo{
+  font-family:'Baloo Bhai 2',cursive;font-size:22px;font-weight:800;
+  color:var(--green);margin-bottom:14px;
+}
+.footer-logo span{color:#ffdb70;}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:16px;}
+.footer-links a{color:#8fa0b4;font-size:13px;}
+.footer-links a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid #1e3550;padding-top:14px;color:#5a7492;font-size:12px;}
+
+/* ===== TABLET / DESKTOP OVERRIDES ===== */
+@media(min-width:600px){
+  .cat-grid-main{grid-template-columns:repeat(5,1fr);}
+  .hero-banner{height:200px;}
+  .hero-title{font-size:28px;}
+}
+@media(min-width:900px){
+  .cat-grid-main{grid-template-columns:repeat(9,1fr);}
+  .bottom-nav{display:none;}
+  /* Show desktop nav links */
+  .nav-links{display:flex;}
+  .loc-select{max-width:180px;}
+}
+@media(max-width:899px){
+  .nav-links{display:none;}
+}
+@media(min-width:1024px){
+  .cat-grid-main{grid-template-columns:repeat(9,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- ████████ TOP NAV ████████ -->
+<nav class="topnav" role="navigation" aria-label="Main navigation">
+  <div class="topnav-inner">
+    <!-- LOGO -->
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-box">Easy<span>Raabta</span></div>
+    </a>
+
+    <!-- Desktop quick links (Motors / Property style) -->
+    <div class="nav-links">
+      <a href="listings.html?cat=vehicles" class="nav-link">
+        <span class="nl-icon">🚗</span> Motors
+      </a>
+      <a href="listings.html?cat=property" class="nav-link">
+        <span class="nl-icon">🏠</span> Property
+      </a>
+    </div>
+
+    <!-- Right icons -->
+    <div class="nav-right">
+      <a href="chat.html" class="nav-icon-btn" aria-label="Messages">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        <span class="nav-badge">3</span>
+      </a>
+      <a href="#" class="nav-icon-btn" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      </a>
+      <a href="login.html" class="nav-icon-btn" aria-label="Account" style="font-size:22px;">👤</a>
+      <a href="post-ad.html" class="btn-sell-top">
+        <span class="plus">＋</span> SELL
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ████████ SEARCH BAR ████████ -->
+<div class="search-row">
+  <div class="search-inner">
+    <div class="loc-select">
+      <span class="loc-pin">📍</span>
+      <select aria-label="Select city">
+        <option>Pakistan</option>
+        <option>Karachi</option>
+        <option>Lahore</option>
+        <option>Islamabad</option>
+        <option>Rawalpindi</option>
+        <option>Faisalabad</option>
+        <option>Multan</option>
+        <option>Peshawar</option>
+        <option>Quetta</option>
+        <option>Hyderabad</option>
+        <option>Sialkot</option>
+        <option>Abbottabad</option>
+      </select>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="search-box">
+      <input type="search" id="mainSearch" placeholder="Find Cars, Mobile Phones and more…" autocomplete="off" aria-label="Search ads"/>
+      <button class="search-btn" onclick="doSearch()" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ████████ CATEGORY QUICK LINKS ████████ -->
+<div class="cat-quicklinks">
+  <div class="cat-ql-inner">
+    <div class="ql-all" onclick="window.location='categories.html'">
+      All Categories
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <a href="listings.html?cat=mobiles" class="ql-link">Mobile Phones</a>
+    <a href="listings.html?cat=vehicles" class="ql-link">Cars</a>
+    <a href="listings.html?cat=bikes" class="ql-link">Motorcycles</a>
+    <a href="listings.html?cat=property" class="ql-link">Houses</a>
+    <a href="listings.html?cat=electronics" class="ql-link">Video-Audios</a>
+    <a href="listings.html?cat=mobiles&sub=Tablets" class="ql-link">Tablets</a>
+    <a href="listings.html?cat=property&sub=Land" class="ql-link">Land &amp; Plots</a>
+    <a href="listings.html?cat=fashion" class="ql-link">Fashion</a>
+    <a href="listings.html?cat=jobs" class="ql-link">Jobs</a>
+  </div>
+</div>
+
+<!-- ████████ HERO BANNER ████████ -->
+<div id="bannerWrap" style="position:relative;">
+  <div class="hero-banner" id="heroBanner" style="margin:14px;">
+    <div class="hero-content">
+      <div class="hero-eyebrow">🇵🇰 Pakistan's #1 Classifieds</div>
+      <div class="hero-title">Post & Sell<br/><span>100% FREE</span> Today!</div>
+      <a href="post-ad.html" class="hero-cta">+ Post Your Ad →</a>
+    </div>
+    <div class="hero-deco">🛒</div>
+  </div>
+  <div class="banner-dots">
+    <div class="banner-dot active"></div>
+    <div class="banner-dot"></div>
+    <div class="banner-dot"></div>
+  </div>
+</div>
+
+<!-- ████████ MAIN CATEGORY GRID ████████ -->
+<div class="section-wrap">
+  <div class="sec-head">
+    <h2>All Categories</h2>
+    <a href="categories.html" class="sec-see-all">See all →</a>
+  </div>
+  <div class="cat-grid-main" id="mainCatGrid">
+    <!-- Row 1 (same as OLX screenshot) -->
+    <a href="listings.html?cat=mobiles" class="cat-item" style="animation-delay:.05s">
+      <div class="cat-img-wrap" style="background:#eaf4ff;">📱</div>
+      <p>Mobiles</p>
+    </a>
+    <a href="listings.html?cat=vehicles" class="cat-item" style="animation-delay:.08s">
+      <div class="cat-img-wrap" style="background:#fff4e6;">🚗</div>
+      <p>Vehicles</p>
+    </a>
+    <a href="listings.html?cat=property&sub=sale" class="cat-item" style="animation-delay:.11s">
+      <div class="cat-img-wrap" style="background:#efffef;">🏠</div>
+      <p>Property For Sale</p>
+    </a>
+    <a href="listings.html?cat=property&sub=rent" class="cat-item" style="animation-delay:.14s">
+      <div class="cat-img-wrap" style="background:#f0f7ff;">🔑</div>
+      <p>Property For Rent</p>
+    </a>
+    <a href="listings.html?cat=electronics" class="cat-item" style="animation-delay:.17s">
+      <div class="cat-img-wrap" style="background:#f5f0ff;">📷</div>
+      <p>Electronics &amp; Home…</p>
+    </a>
+    <a href="listings.html?cat=bikes" class="cat-item" style="animation-delay:.20s">
+      <div class="cat-img-wrap" style="background:#fffbea;">🏍️</div>
+      <p>Bikes</p>
+    </a>
+    <a href="listings.html?cat=business" class="cat-item" style="animation-delay:.23s">
+      <div class="cat-img-wrap" style="background:#fff0f0;">🚜</div>
+      <p>Business, Industrial &amp;…</p>
+    </a>
+    <a href="listings.html?cat=services" class="cat-item" style="animation-delay:.26s">
+      <div class="cat-img-wrap" style="background:#f0fff8;">🛠️</div>
+      <p>Services</p>
+    </a>
+    <a href="listings.html?cat=jobs" class="cat-item" style="animation-delay:.29s">
+      <div class="cat-img-wrap" style="background:#fff8f0;">💼</div>
+      <p>Jobs</p>
+    </a>
+
+    <!-- Row 2 -->
+    <a href="listings.html?cat=animals" class="cat-item" style="animation-delay:.32s">
+      <div class="cat-img-wrap" style="background:#fff9f0;">🐄</div>
+      <p>Animals</p>
+    </a>
+    <a href="listings.html?cat=furniture" class="cat-item" style="animation-delay:.35s">
+      <div class="cat-img-wrap" style="background:#f0f4ff;">🛋️</div>
+      <p>Furniture &amp; Home Decor</p>
+    </a>
+    <a href="listings.html?cat=fashion" class="cat-item" style="animation-delay:.38s">
+      <div class="cat-img-wrap" style="background:#fff0f8;">👗</div>
+      <p>Fashion &amp; Beauty</p>
+    </a>
+    <a href="listings.html?cat=books" class="cat-item" style="animation-delay:.41s">
+      <div class="cat-img-wrap" style="background:#f0fff4;">📚</div>
+      <p>Books, Sports &amp; Hobbies</p>
+    </a>
+    <a href="listings.html?cat=kids" class="cat-item" style="animation-delay:.44s">
+      <div class="cat-img-wrap" style="background:#fff8f0;">🧸</div>
+      <p>Kids</p>
+    </a>
+    <a href="listings.html?cat=food" class="cat-item" style="animation-delay:.47s">
+      <div class="cat-img-wrap" style="background:#fff0f0;">🍕</div>
+      <p>Food &amp; Restaurant</p>
+    </a>
+    <a href="listings.html?cat=agriculture" class="cat-item" style="animation-delay:.50s">
+      <div class="cat-img-wrap" style="background:#f2ffe8;">🌾</div>
+      <p>Agriculture</p>
+    </a>
+    <a href="listings.html?cat=travel" class="cat-item" style="animation-delay:.53s">
+      <div class="cat-img-wrap" style="background:#eafaff;">✈️</div>
+      <p>Travel &amp; Visa</p>
+    </a>
+    <a href="categories.html" class="cat-item" style="animation-delay:.56s">
+      <div class="cat-img-wrap" style="background:#f5f5f5;">📂</div>
+      <p>More…</p>
+    </a>
+  </div>
+</div>
+
+<!-- ████████ PROMO BANNERS ████████ -->
+<div class="promo-strip">
+  <div class="promo-card" style="background:linear-gradient(135deg,#0f4c75,#1b6ca8);">
+    <div>
+      <h3>Post FREE Ads!</h3>
+      <p>Reach millions of buyers across Pakistan instantly.</p>
+    </div>
+    <a href="post-ad.html" style="color:#1b6ca8;">Post Now 🚀</a>
+  </div>
+  <div class="promo-card" style="background:linear-gradient(135deg,#7b2d8b,#a855f7);">
+    <div>
+      <h3>Sell Faster!</h3>
+      <p>Boost your ad to top of results — more views, more buyers.</p>
+    </div>
+    <a href="post-ad.html" style="color:#7b2d8b;">Boost Now ⚡</a>
+  </div>
+  <div class="promo-card" style="background:linear-gradient(135deg,#0d7a6a,#23d2b5);">
+    <div>
+      <h3>Download App</h3>
+      <p>Get instant alerts when someone messages you.</p>
+    </div>
+    <a href="#" style="color:#0d7a6a;">Get App 📲</a>
+  </div>
+</div>
+
+<!-- ████████ FRESH ADS ████████ -->
+<div class="section-wrap" style="padding-top:0;">
+  <div class="sec-head">
+    <h2>🔥 Fresh Ads</h2>
+    <a href="listings.html" class="sec-see-all">View all →</a>
+  </div>
+  <div class="ads-strip" id="freshAds"></div>
+</div>
+
+<!-- ████████ CARS ████████ -->
+<div class="section-wrap" style="padding-top:0;">
+  <div class="sec-head">
+    <h2>🚗 Cars</h2>
+    <a href="listings.html?cat=vehicles" class="sec-see-all">View all →</a>
+  </div>
+  <div class="ads-strip" id="carsAds"></div>
+</div>
+
+<!-- ████████ MOBILES ████████ -->
+<div class="section-wrap" style="padding-top:0;">
+  <div class="sec-head">
+    <h2>📱 Mobile Phones</h2>
+    <a href="listings.html?cat=mobiles" class="sec-see-all">View all →</a>
+  </div>
+  <div class="ads-strip" id="phonesAds"></div>
+</div>
+
+<!-- ████████ FOOTER ████████ -->
+<footer class="site-footer">
+  <div class="footer-logo">Easy<span>Raabta</span></div>
+  <p style="color:#6b7a8d;font-size:13px;margin-bottom:14px;">Pakistan's trusted buy & sell platform</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="listings.html">All Ads</a>
+    <a href="categories.html">Categories</a>
+    <a href="post-ad.html">Post Ad</a>
+    <a href="profile.html">My Account</a>
+    <a href="chat.html">Messages</a>
+    <a href="#">Help Centre</a>
+    <a href="#">Safety Tips</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Use</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact Us</a>
+    <a href="#">Sitemap</a>
+  </div>
+  <div style="display:flex;gap:14px;margin-bottom:14px;">
+    <a href="#" style="color:#8fa0b4;font-size:22px;" aria-label="Facebook">📘</a>
+    <a href="#" style="color:#8fa0b4;font-size:22px;" aria-label="Instagram">📸</a>
+    <a href="#" style="color:#8fa0b4;font-size:22px;" aria-label="Twitter">🐦</a>
+    <a href="#" style="color:#8fa0b4;font-size:22px;" aria-label="YouTube">▶️</a>
+  </div>
+  <div class="footer-bottom">© 2025 Easyraabta.com — All Rights Reserved | Made with ❤️ in Pakistan 🇵🇰</div>
+</footer>
+
+<!-- ████████ BOTTOM NAV ████████ -->
+<nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
+  <a href="index.html" class="bn-item active" aria-label="Home">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    Home
+  </a>
+  <a href="listings.html" class="bn-item" aria-label="Browse">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Browse
+  </a>
+  <div class="bn-sell">
+    <a href="post-ad.html" aria-label="Post Ad">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      SELL
+    </a>
+  </div>
+  <a href="chat.html" class="bn-item" aria-label="Chats">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Chats
+    <span class="bn-dot"></span>
+  </a>
+  <a href="profile.html" class="bn-item" aria-label="Account">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Account
+  </a>
+</nav>
+
+<!-- ████████ SCRIPTS ████████ -->
+<script>
+/* ---- AD DATA ---- */
+const ADS = [
+  {id:0,emoji:'📱',title:'iPhone 15 Pro Max 256GB',price:'Rs 3,50,000',loc:'Lahore',ago:'2h',cat:'mobiles'},
+  {id:1,emoji:'🚗',title:'Toyota Corolla 2020 Auto',price:'Rs 45,00,000',loc:'Karachi',ago:'1h',cat:'vehicles'},
+  {id:2,emoji:'🏠',title:'3BHK Apartment DHA Phase 6',price:'Rs 2,20,00,000',loc:'Islamabad',ago:'3h',cat:'property'},
+  {id:3,emoji:'💻',title:'MacBook Pro M3 14" 2024',price:'Rs 4,20,000',loc:'Lahore',ago:'5h',cat:'electronics'},
+  {id:4,emoji:'🏍️',title:'Honda CB150F 2023',price:'Rs 4,50,000',loc:'Rawalpindi',ago:'1h',cat:'bikes'},
+  {id:5,emoji:'📱',title:'Samsung Galaxy S24 Ultra',price:'Rs 2,80,000',loc:'Faisalabad',ago:'30m',cat:'mobiles'},
+  {id:6,emoji:'🚗',title:'Honda Civic Oriel 2022',price:'Rs 52,00,000',loc:'Lahore',ago:'4h',cat:'vehicles'},
+  {id:7,emoji:'🚗',title:'Suzuki Swift Manual 2021',price:'Rs 28,00,000',loc:'Lahore',ago:'45m',cat:'vehicles'},
+  {id:8,emoji:'📱',title:'Google Pixel 8 Pro',price:'Rs 1,75,000',loc:'Lahore',ago:'1d',cat:'mobiles'},
+  {id:9,emoji:'📱',title:'OnePlus 12 5G 256GB',price:'Rs 1,20,000',loc:'Karachi',ago:'6h',cat:'mobiles'},
+  {id:10,emoji:'🚗',title:'Toyota Vitz 2019 Auto',price:'Rs 22,00,000',loc:'Islamabad',ago:'2h',cat:'vehicles'},
+  {id:11,emoji:'🚗',title:'Kia Sportage Alpha 2022',price:'Rs 70,00,000',loc:'Lahore',ago:'3h',cat:'vehicles'},
+];
+
+function renderCard(ad){
+  return `<a href="ad-detail.html?id=${ad.id}" class="ad-card">
+    <div class="ad-thumb">${ad.emoji}<span class="ad-fav">🤍</span></div>
+    <div class="ad-body">
+      <div class="ad-price">${ad.price}</div>
+      <div class="ad-title">${ad.title}</div>
+      <div class="ad-loc">📍 ${ad.loc} · ${ad.ago} ago</div>
+    </div>
+  </a>`;
+}
+
+document.getElementById('freshAds').innerHTML = ADS.map(renderCard).join('');
+document.getElementById('carsAds').innerHTML = ADS.filter(a=>a.cat==='vehicles').map(renderCard).join('');
+document.getElementById('phonesAds').innerHTML = ADS.filter(a=>a.cat==='mobiles').map(renderCard).join('');
+
+/* ---- BANNER AUTO-SLIDE ---- */
+const banners=[
+  {grad:'linear-gradient(135deg,#0f4c75 0%,#1b6ca8 40%,#23d2b5 100%)',eyebrow:'🇵🇰 Pakistan\'s #1 Classifieds',title:'Post & Sell<br/><span style="color:#ffdb70">100% FREE</span> Today!',cta:'+ Post Your Ad →',link:'post-ad.html',deco:'🛒'},
+  {grad:'linear-gradient(135deg,#7b2d00 0%,#c04a00 50%,#f97316 100%)',eyebrow:'⚡ Top Deals This Week',title:'Find Your<br/><span style="color:#fff">Dream Car</span>',cta:'Browse Cars →',link:'listings.html?cat=vehicles',deco:'🚗'},
+  {grad:'linear-gradient(135deg,#1a3552 0%,#1b6ca8 60%,#43a8dd 100%)',eyebrow:'🏠 Property Deals',title:'Buy, Sell &<br/><span style="color:#a0f0e0">Rent Property</span>',cta:'View Properties →',link:'listings.html?cat=property',deco:'🏠'},
+];
+let bannerIdx=0;
+function rotateBanner(){
+  bannerIdx=(bannerIdx+1)%banners.length;
+  const b=banners[bannerIdx];
+  const el=document.getElementById('heroBanner');
+  el.style.background=b.grad;
+  el.querySelector('.hero-eyebrow').textContent=b.eyebrow;
+  el.querySelector('.hero-title').innerHTML=b.title;
+  el.querySelector('.hero-cta').textContent=b.cta;
+  el.querySelector('.hero-cta').href=b.link;
+  el.querySelector('.hero-deco').textContent=b.deco;
+  document.querySelectorAll('.banner-dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===bannerIdx);
+  });
+}
+setInterval(rotateBanner,3500);
+
+/* ---- SEARCH ---- */
+function doSearch(){
+  const q=document.getElementById('mainSearch').value.trim();
+  window.location.href='listings.html?q='+encodeURIComponent(q);
+}
+document.getElementById('mainSearch').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
+</script>
+</body>
+</html>

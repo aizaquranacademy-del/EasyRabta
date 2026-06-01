@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+<title>Browse Ads — Easyraabta.com</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Easy<span>Raabta</span></a>
+    <div class="nav-search">
+      <input type="search" placeholder="Search ads…" id="srchInput"/>
+      <button onclick="applySearch()" aria-label="Search">🔍</button>
+    </div>
+    <div class="nav-actions">
+      <a href="post-ad.html" class="btn-sell">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Sell
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Filters -->
+<div class="filter-bar" id="filterBar">
+  <button class="chip active" onclick="setFilter('all',this)">All</button>
+  <button class="chip" onclick="setFilter('mobiles',this)">📱 Mobiles</button>
+  <button class="chip" onclick="setFilter('vehicles',this)">🚗 Vehicles</button>
+  <button class="chip" onclick="setFilter('property',this)">🏠 Property</button>
+  <button class="chip" onclick="setFilter('electronics',this)">💻 Electronics</button>
+  <button class="chip" onclick="setFilter('bikes',this)">🏍️ Bikes</button>
+  <button class="chip" onclick="setFilter('fashion',this)">👗 Fashion</button>
+  <button class="chip" onclick="setFilter('jobs',this)">💼 Jobs</button>
+  <button class="chip" onclick="setFilter('services',this)">🛠️ Services</button>
+</div>
+
+<!-- Sort + count -->
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#fff;border-bottom:1px solid var(--border);">
+  <span id="adsCount" style="font-size:13px;color:var(--text-muted);font-weight:600;"></span>
+  <select id="sortSelect" onchange="applySorting()" style="font-size:13px;border:1.5px solid var(--border);border-radius:7px;padding:5px 10px;outline:none;">
+    <option value="latest">Latest First</option>
+    <option value="price_asc">Price: Low to High</option>
+    <option value="price_desc">Price: High to Low</option>
+  </select>
+</div>
+
+<div class="section" style="padding:12px;margin-bottom:60px;">
+  <div class="ad-grid" id="adsGrid"></div>
+  <div id="noResults" style="display:none;text-align:center;padding:40px 20px;color:var(--text-muted);">
+    <div style="font-size:48px;">🔍</div>
+    <h3 style="margin:12px 0 6px;">No ads found</h3>
+    <p>Try different keywords or category</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Easy<span>Raabta</span></div>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="post-ad.html">Post Ad</a><a href="profile.html">Account</a>
+  </div>
+  <div class="footer-bottom">© 2025 Easyraabta.com</div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="index.html">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    Home
+  </a>
+  <a href="listings.html" class="active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Browse
+  </a>
+  <div class="sell-btn-nav">
+    <a href="post-ad.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Sell
+    </a>
+  </div>
+  <a href="chat.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Chats
+  </a>
+  <a href="profile.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Account
+  </a>
+</nav>
+
+<script>
+const ALL_ADS = [
+  {id:0,emoji:'📱',title:'iPhone 15 Pro Max 256GB',price:350000,display:'Rs 3,50,000',loc:'Lahore',time:'2h ago',cat:'mobiles'},
+  {id:1,emoji:'🚗',title:'Toyota Corolla 2020',price:4500000,display:'Rs 45,00,000',loc:'Karachi',time:'1h ago',cat:'vehicles'},
+  {id:2,emoji:'🏠',title:'3BHK Apartment DHA Phase 6',price:22000000,display:'Rs 2,20,00,000',loc:'Islamabad',time:'3h ago',cat:'property'},
+  {id:3,emoji:'💻',title:'MacBook Pro M3 14" 2024',price:420000,display:'Rs 4,20,000',loc:'Lahore',time:'5h ago',cat:'electronics'},
+  {id:4,emoji:'🏍️',title:'Honda CB150F 2023',price:450000,display:'Rs 4,50,000',loc:'Rawalpindi',time:'1h ago',cat:'bikes'},
+  {id:5,emoji:'📱',title:'Samsung Galaxy S24 Ultra',price:280000,display:'Rs 2,80,000',loc:'Faisalabad',time:'30m ago',cat:'mobiles'},
+  {id:6,emoji:'🚗',title:'Honda Civic Oriel 2022',price:5200000,display:'Rs 52,00,000',loc:'Lahore',time:'4h ago',cat:'vehicles'},
+  {id:7,emoji:'🏠',title:'Residential Plot F-8/3',price:15000000,display:'Rs 1,50,00,000',loc:'Islamabad',time:'2h ago',cat:'property'},
+  {id:8,emoji:'❄️',title:'Dawlance Split AC 1.5 Ton',price:85000,display:'Rs 85,000',loc:'Karachi',time:'6h ago',cat:'electronics'},
+  {id:9,emoji:'🚗',title:'Suzuki Swift Manual 2021',price:2800000,display:'Rs 28,00,000',loc:'Lahore',time:'45m ago',cat:'vehicles'},
+  {id:10,emoji:'👗',title:'Lawn Suits Unstitched (3pc)',price:4500,display:'Rs 4,500',loc:'Lahore',time:'1h ago',cat:'fashion'},
+  {id:11,emoji:'💼',title:'Software Engineer Needed',price:0,display:'Negotiable',loc:'Karachi',time:'2h ago',cat:'jobs'},
+  {id:12,emoji:'🛠️',title:'AC Repair & Service',price:2000,display:'Rs 2,000',loc:'Islamabad',time:'30m ago',cat:'services'},
+  {id:13,emoji:'📱',title:'Google Pixel 8 Pro',price:175000,display:'Rs 1,75,000',loc:'Lahore',time:'1d ago',cat:'mobiles'},
+  {id:14,emoji:'🏍️',title:'Yamaha YBR 125G',price:320000,display:'Rs 3,20,000',loc:'Karachi',time:'3h ago',cat:'bikes'},
+  {id:15,emoji:'💻',title:'Dell XPS 15 i7 RTX4060',price:360000,display:'Rs 3,60,000',loc:'Rawalpindi',time:'5h ago',cat:'electronics'},
+];
+
+let currentFilter = 'all';
+let currentQ = '';
+
+const params = new URLSearchParams(location.search);
+if(params.get('cat')) currentFilter = params.get('cat');
+if(params.get('q')) currentQ = params.get('q');
+if(currentQ) document.getElementById('srchInput').value = currentQ;
+
+// Activate correct chip
+if(currentFilter !== 'all'){
+  document.querySelectorAll('.chip').forEach(c=>{
+    c.classList.remove('active');
+    if(c.textContent.toLowerCase().includes(currentFilter)) c.classList.add('active');
+  });
+}
+
+function renderAds(){
+  let ads = ALL_ADS;
+  if(currentFilter !== 'all') ads = ads.filter(a=>a.cat===currentFilter);
+  if(currentQ) ads = ads.filter(a=>a.title.toLowerCase().includes(currentQ.toLowerCase()));
+
+  const sort = document.getElementById('sortSelect').value;
+  if(sort==='price_asc') ads = [...ads].sort((a,b)=>a.price-b.price);
+  else if(sort==='price_desc') ads = [...ads].sort((a,b)=>b.price-a.price);
+
+  const grid = document.getElementById('adsGrid');
+  const noRes = document.getElementById('noResults');
+  document.getElementById('adsCount').textContent = `${ads.length} ads found`;
+
+  if(!ads.length){
+    grid.innerHTML=''; noRes.style.display='block'; return;
+  }
+  noRes.style.display='none';
+  grid.innerHTML = ads.map(a=>`
+    <a href="ad-detail.html?id=${a.id}" class="ad-card">
+      <div style="height:140px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:56px;">
+        ${a.emoji}
+      </div>
+      <div class="ad-body">
+        <div class="ad-price">${a.display}</div>
+        <div class="ad-title">${a.title}</div>
+        <div class="ad-meta">📍 ${a.loc} · ${a.time}</div>
+      </div>
+    </a>`).join('');
+}
+
+function setFilter(cat, el){
+  currentFilter = cat;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  renderAds();
+}
+function applySorting(){ renderAds(); }
+function applySearch(){
+  currentQ = document.getElementById('srchInput').value;
+  renderAds();
+}
+document.getElementById('srchInput').addEventListener('keydown',e=>{if(e.key==='Enter')applySearch();});
+
+renderAds();
+</script>
+</body>
+</html>

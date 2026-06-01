@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+<title>Chats — Easyraabta.com</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Easy<span>Raabta</span></a>
+    <div style="margin-left:auto;font-size:17px;font-weight:700;">💬 Chats</div>
+  </div>
+</nav>
+
+<!-- TABS -->
+<div style="display:flex;background:#fff;border-bottom:1px solid var(--border);">
+  <button id="tab-buying" onclick="showTab('buying')" style="flex:1;padding:13px;font-size:14px;font-weight:700;border-bottom:2.5px solid var(--primary);color:var(--primary);background:none;cursor:pointer;">Buying (3)</button>
+  <button id="tab-selling" onclick="showTab('selling')" style="flex:1;padding:13px;font-size:14px;font-weight:600;border-bottom:2.5px solid transparent;color:var(--text-muted);background:none;cursor:pointer;">Selling (1)</button>
+</div>
+
+<!-- BUYING CHATS -->
+<div id="buying-tab">
+  <div class="chat-list">
+    <a href="chat-thread.html?id=0">
+      <div class="chat-avatar">🧑</div>
+      <div class="chat-info">
+        <h4>Bilal Raza · Toyota Corolla 2020</h4>
+        <p>Is the price final? Can you lower a bit?</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+        <div class="chat-time">2m ago</div>
+        <div class="badge">2</div>
+      </div>
+    </a>
+    <a href="chat-thread.html?id=1">
+      <div class="chat-avatar" style="font-size:24px;">👩</div>
+      <div class="chat-info">
+        <h4>Sara · MacBook Pro M3</h4>
+        <p>Still available? I'm interested.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+        <div class="chat-time">1h ago</div>
+        <div class="badge">1</div>
+      </div>
+    </a>
+    <a href="chat-thread.html?id=2">
+      <div class="chat-avatar">👴</div>
+      <div class="chat-info">
+        <h4>Asim · DHA Apartment</h4>
+        <p>Can I visit tomorrow at 3pm?</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+        <div class="chat-time">3h ago</div>
+      </div>
+    </a>
+    <a href="chat-thread.html?id=3">
+      <div class="chat-avatar">🧔</div>
+      <div class="chat-info">
+        <h4>Kamran · iPhone 15 Pro Max</h4>
+        <p>Can you do exchange with iPhone 14?</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+        <div class="chat-time">Yesterday</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- SELLING CHATS -->
+<div id="selling-tab" style="display:none;">
+  <div class="chat-list">
+    <a href="chat-thread.html?id=4">
+      <div class="chat-avatar">🧑‍💼</div>
+      <div class="chat-info">
+        <h4>Usman · Honda CB150F</h4>
+        <p>Okay, I'll take it. When to meet?</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+        <div class="chat-time">5m ago</div>
+        <div class="badge">1</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div style="height:70px;"></div>
+
+<nav class="bottom-nav">
+  <a href="index.html">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    Home
+  </a>
+  <a href="listings.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Browse
+  </a>
+  <div class="sell-btn-nav">
+    <a href="post-ad.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Sell
+    </a>
+  </div>
+  <a href="chat.html" class="active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Chats
+  </a>
+  <a href="profile.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Account
+  </a>
+</nav>
+
+<script>
+function showTab(tab){
+  ['buying','selling'].forEach(t=>{
+    document.getElementById(t+'-tab').style.display = t===tab ? 'block':'none';
+    const btn = document.getElementById('tab-'+t);
+    btn.style.borderBottomColor = t===tab ? 'var(--primary)':'transparent';
+    btn.style.color = t===tab ? 'var(--primary)':'var(--text-muted)';
+  });
+}
+</script>
+</body>
+</html>

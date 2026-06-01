@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+<title>Post an Ad — Easyraabta.com</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="back-btn" style="font-size:24px;">←</a>
+    <div style="flex:1;text-align:center;font-family:'Baloo Bhai 2',cursive;font-size:18px;font-weight:700;">Post an Ad</div>
+    <div style="width:40px;"></div>
+  </div>
+</nav>
+
+<!-- STEPS -->
+<div style="background:#fff;padding:12px 16px;border-bottom:1px solid var(--border);">
+  <div style="display:flex;align-items:center;gap:0;">
+    <div class="step-dot active" id="s1">1</div>
+    <div class="step-line" id="l1"></div>
+    <div class="step-dot" id="s2">2</div>
+    <div class="step-line" id="l2"></div>
+    <div class="step-dot" id="s3">3</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;margin-top:5px;font-size:11px;color:var(--text-muted);">
+    <span>Category</span><span>Details</span><span>Publish</span>
+  </div>
+</div>
+
+<style>
+.step-dot{
+  width:28px;height:28px;border-radius:50%;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--text-muted);flex-shrink:0;
+  transition:all .3s;
+}
+.step-dot.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+.step-dot.done{background:var(--primary-light);border-color:var(--primary);color:var(--primary);}
+.step-line{flex:1;height:2px;background:var(--border);transition:background .3s;}
+.step-line.done{background:var(--primary);}
+</style>
+
+<div id="step1" style="padding-bottom:80px;">
+  <div class="section" style="padding:12px;">
+    <div class="form-card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:14px;">Select Category</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;" id="catSelect">
+        <button class="cat-select-btn" onclick="selectCat('Mobiles','📱',this)">📱 Mobiles</button>
+        <button class="cat-select-btn" onclick="selectCat('Vehicles','🚗',this)">🚗 Vehicles</button>
+        <button class="cat-select-btn" onclick="selectCat('Property','🏠',this)">🏠 Property</button>
+        <button class="cat-select-btn" onclick="selectCat('Electronics','💻',this)">💻 Electronics</button>
+        <button class="cat-select-btn" onclick="selectCat('Bikes','🏍️',this)">🏍️ Bikes</button>
+        <button class="cat-select-btn" onclick="selectCat('Fashion','👗',this)">👗 Fashion</button>
+        <button class="cat-select-btn" onclick="selectCat('Jobs','💼',this)">💼 Jobs</button>
+        <button class="cat-select-btn" onclick="selectCat('Services','🛠️',this)">🛠️ Services</button>
+        <button class="cat-select-btn" onclick="selectCat('Animals','🐄',this)">🐄 Animals</button>
+        <button class="cat-select-btn" onclick="selectCat('Agriculture','🌾',this)">🌾 Agriculture</button>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="goStep(2)" style="margin-top:14px;" id="catNext" disabled>Next: Add Details</button>
+  </div>
+</div>
+
+<div id="step2" style="display:none;padding-bottom:100px;">
+  <div class="section" style="padding:12px;">
+    <div class="form-card">
+      <!-- Image Upload -->
+      <div class="form-group">
+        <label>Photos (up to 10)</label>
+        <div class="img-upload" onclick="document.getElementById('imgInput').click()">
+          <div class="upload-icon">📷</div>
+          <div>Tap to add photos</div>
+          <div style="font-size:12px;margin-top:4px;color:var(--text-muted);">First photo is the cover</div>
+          <input type="file" id="imgInput" multiple accept="image/*" style="display:none;" onchange="showImgPreview(this)"/>
+        </div>
+        <div id="imgPreview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Ad Title *</label>
+        <input type="text" id="adTitle" placeholder="e.g. iPhone 15 Pro Max 256GB" maxlength="70"/>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;text-align:right;"><span id="titleCount">0</span>/70</div>
+      </div>
+
+      <div class="form-group">
+        <label>Price (Rs)</label>
+        <input type="number" id="adPrice" placeholder="Enter price or 0 for Free"/>
+        <label style="margin-top:8px;display:flex;align-items:center;gap:8px;font-weight:500;">
+          <input type="checkbox" id="negotiable" style="width:auto;accent-color:var(--primary);"/> Price is negotiable
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>Description *</label>
+        <textarea id="adDesc" placeholder="Describe your item – condition, features, reason for selling…" maxlength="4096"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>City *</label>
+        <select id="adCity">
+          <option value="">Select city…</option>
+          <option>Karachi</option><option>Lahore</option><option>Islamabad</option>
+          <option>Rawalpindi</option><option>Faisalabad</option><option>Multan</option>
+          <option>Peshawar</option><option>Quetta</option><option>Hyderabad</option>
+          <option>Sialkot</option><option>Gujranwala</option><option>Abbottabad</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Area / Neighbourhood</label>
+        <input type="text" id="adArea" placeholder="e.g. DHA Phase 5, Gulshan"/>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:14px;">
+      <button onclick="goStep(1)" style="flex:1;padding:13px;border-radius:var(--radius);border:1.5px solid var(--border);font-weight:700;">Back</button>
+      <button onclick="goStep(3)" class="btn-primary" style="flex:2;">Review Ad →</button>
+    </div>
+  </div>
+</div>
+
+<div id="step3" style="display:none;padding-bottom:100px;">
+  <div class="section" style="padding:12px;">
+    <!-- Preview -->
+    <div style="background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px;">
+      <div style="height:160px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:72px;" id="previewEmoji">📱</div>
+      <div style="padding:14px;">
+        <div style="font-size:22px;font-weight:800;color:var(--primary);" id="previewPrice">Rs —</div>
+        <div style="font-size:16px;font-weight:700;margin:4px 0;" id="previewTitle">Your Ad Title</div>
+        <div style="font-size:13px;color:var(--text-muted);" id="previewLoc">📍 City</div>
+        <div style="font-size:13px;margin-top:10px;" id="previewDesc">Description…</div>
+      </div>
+    </div>
+
+    <div class="form-card" style="margin-bottom:14px;">
+      <h4 style="font-weight:700;margin-bottom:10px;">Your Contact</h4>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="contactName" placeholder="Your name"/>
+      </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label>Phone</label>
+        <input type="tel" id="contactPhone" placeholder="+92 3XX XXXXXXX"/>
+      </div>
+    </div>
+
+    <div style="background:var(--accent-light);border-radius:var(--radius);padding:12px;margin-bottom:14px;font-size:13px;">
+      ✅ Your ad will be <strong>live immediately</strong> and visible to thousands of buyers.
+    </div>
+
+    <div style="display:flex;gap:10px;">
+      <button onclick="goStep(2)" style="flex:1;padding:13px;border-radius:var(--radius);border:1.5px solid var(--border);font-weight:700;">Back</button>
+      <button onclick="publishAd()" class="btn-primary" style="flex:2;">🚀 Publish Ad</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:20px;padding:32px 24px;text-align:center;max-width:340px;width:100%;">
+    <div style="font-size:64px;margin-bottom:12px;">🎉</div>
+    <h2 style="font-family:'Baloo Bhai 2',cursive;font-size:22px;margin-bottom:8px;">Ad Published!</h2>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:20px;">Your ad is now live. Buyers can see it across Pakistan.</p>
+    <a href="index.html" class="btn-primary" style="display:block;margin-bottom:10px;">Go to Home</a>
+    <a href="profile.html" style="display:block;color:var(--primary);font-weight:700;font-size:14px;">View My Ads</a>
+  </div>
+</div>
+
+<style>
+.cat-select-btn{
+  padding:12px 8px;border-radius:var(--radius);border:1.5px solid var(--border);
+  font-size:14px;font-weight:600;background:#fff;cursor:pointer;
+  transition:all .2s;text-align:center;
+}
+.cat-select-btn.selected{border-color:var(--primary);background:var(--primary-light);color:var(--primary);}
+</style>
+
+<script>
+let selectedCat = null;
+let selectedEmoji = '📦';
+
+document.getElementById('adTitle').addEventListener('input',function(){
+  document.getElementById('titleCount').textContent = this.value.length;
+});
+
+function selectCat(cat, emoji, el){
+  selectedCat = cat; selectedEmoji = emoji;
+  document.querySelectorAll('.cat-select-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('catNext').disabled = false;
+}
+
+function goStep(n){
+  [1,2,3].forEach(i=>{
+    document.getElementById('step'+i).style.display = i===n?'block':'none';
+  });
+  [1,2,3].forEach(i=>{
+    const dot = document.getElementById('s'+i);
+    if(i<n){ dot.className='step-dot done'; dot.textContent='✓'; }
+    else if(i===n){ dot.className='step-dot active'; dot.textContent=i; }
+    else{ dot.className='step-dot'; dot.textContent=i; }
+  });
+  [1,2].forEach(i=>{
+    if(document.getElementById('l'+i))
+      document.getElementById('l'+i).className = i<n?'step-line done':'step-line';
+  });
+  if(n===3) updatePreview();
+  window.scrollTo(0,0);
+}
+
+function updatePreview(){
+  const price = document.getElementById('adPrice').value;
+  const neg = document.getElementById('negotiable').checked;
+  document.getElementById('previewEmoji').textContent = selectedEmoji;
+  document.getElementById('previewPrice').textContent = price ? 'Rs '+Number(price).toLocaleString()+(neg?' (Negotiable)':'') : 'Free / Contact';
+  document.getElementById('previewTitle').textContent = document.getElementById('adTitle').value || 'Your Ad Title';
+  document.getElementById('previewLoc').textContent = '📍 '+(document.getElementById('adCity').value||'City')+' '+(document.getElementById('adArea').value||'');
+  document.getElementById('previewDesc').textContent = document.getElementById('adDesc').value || 'Description…';
+}
+
+function showImgPreview(input){
+  const prev = document.getElementById('imgPreview');
+  prev.innerHTML = '';
+  Array.from(input.files).slice(0,10).forEach(f=>{
+    const url = URL.createObjectURL(f);
+    prev.innerHTML += `<div style="width:72px;height:72px;border-radius:8px;overflow:hidden;border:1.5px solid var(--border);"><img src="${url}" style="width:100%;height:100%;object-fit:cover;"/></div>`;
+  });
+}
+
+function publishAd(){
+  const modal = document.getElementById('successModal');
+  modal.style.display = 'flex';
+}
+</script>
+</body>
+</html>

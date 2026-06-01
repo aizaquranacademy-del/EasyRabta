@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+<title>Login — Easyraabta.com</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body style="background:linear-gradient(160deg,var(--primary-dark) 0%,var(--primary) 50%,#26a69a 100%);min-height:100vh;display:flex;flex-direction:column;">
+
+<div style="padding:20px 16px;text-align:center;">
+  <a href="index.html" style="font-family:'Baloo Bhai 2',cursive;font-size:28px;font-weight:800;color:#fff;">Easy<span style="color:#ffcc02;">Raabta</span></a>
+  <p style="color:rgba(255,255,255,.8);font-size:14px;margin-top:4px;">Pakistan ka Apna Bazaar 🇵🇰</p>
+</div>
+
+<div style="background:#fff;border-radius:24px 24px 0 0;flex:1;padding:28px 20px;margin-top:10px;">
+  <div id="loginForm">
+    <h2 style="font-family:'Baloo Bhai 2',cursive;font-size:22px;font-weight:800;margin-bottom:4px;">Welcome Back!</h2>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:24px;">Login to buy & sell on Easyraabta</p>
+
+    <div class="form-group">
+      <label>Phone Number</label>
+      <div style="display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--bg);padding:11px 12px;font-size:15px;font-weight:600;border-right:1.5px solid var(--border);">🇵🇰 +92</div>
+        <input type="tel" placeholder="3XX XXXXXXX" style="flex:1;border:none;padding:11px 13px;font-size:15px;outline:none;"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <div style="position:relative;">
+        <input type="password" id="pwdInput" placeholder="Enter password" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 44px 11px 13px;font-size:15px;outline:none;"/>
+        <button onclick="togglePwd()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:18px;" id="pwdEye">👁️</button>
+      </div>
+    </div>
+
+    <div style="text-align:right;margin-top:-10px;margin-bottom:20px;">
+      <a href="#" style="font-size:13px;color:var(--primary);font-weight:700;">Forgot Password?</a>
+    </div>
+
+    <a href="profile.html" class="btn-primary" style="display:block;text-align:center;margin-bottom:16px;">Login →</a>
+
+    <div style="display:flex;align-items:center;gap:12px;margin:20px 0;">
+      <div style="flex:1;height:1px;background:var(--border);"></div>
+      <span style="color:var(--text-muted);font-size:13px;">or continue with</span>
+      <div style="flex:1;height:1px;background:var(--border);"></div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-bottom:28px;">
+      <button onclick="socialLogin('Google')" style="flex:1;padding:12px;border-radius:10px;border:1.5px solid var(--border);font-size:15px;background:#fff;font-weight:600;cursor:pointer;">🔍 Google</button>
+      <button onclick="socialLogin('Facebook')" style="flex:1;padding:12px;border-radius:10px;border:1.5px solid var(--border);font-size:15px;background:#fff;font-weight:600;cursor:pointer;">📘 Facebook</button>
+    </div>
+
+    <p style="text-align:center;font-size:14px;color:var(--text-muted);">
+      New to Easyraabta? 
+      <a onclick="showSignup()" style="color:var(--primary);font-weight:700;cursor:pointer;">Create Account</a>
+    </p>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div id="signupForm" style="display:none;">
+    <h2 style="font-family:'Baloo Bhai 2',cursive;font-size:22px;font-weight:800;margin-bottom:4px;">Create Account</h2>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:24px;">Join millions of buyers & sellers</p>
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" placeholder="Ahmed Khan"/>
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <div style="display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;">
+        <div style="background:var(--bg);padding:11px 12px;font-size:15px;font-weight:600;border-right:1.5px solid var(--border);">🇵🇰 +92</div>
+        <input type="tel" placeholder="3XX XXXXXXX" style="flex:1;border:none;padding:11px 13px;font-size:15px;outline:none;"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" placeholder="Min 6 characters"/>
+    </div>
+    <div class="form-group" style="margin-bottom:24px;">
+      <label>City</label>
+      <select>
+        <option value="">Select your city…</option>
+        <option>Karachi</option><option>Lahore</option><option>Islamabad</option>
+        <option>Rawalpindi</option><option>Faisalabad</option><option>Multan</option>
+      </select>
+    </div>
+
+    <a href="profile.html" class="btn-primary" style="display:block;text-align:center;margin-bottom:16px;">Create Account 🎉</a>
+    <p style="text-align:center;font-size:13px;color:var(--text-muted);">
+      Already have an account? 
+      <a onclick="showLogin()" style="color:var(--primary);font-weight:700;cursor:pointer;">Login</a>
+    </p>
+  </div>
+</div>
+
+<script>
+let pwdVisible = false;
+function togglePwd(){
+  pwdVisible = !pwdVisible;
+  document.getElementById('pwdInput').type = pwdVisible ? 'text':'password';
+  document.getElementById('pwdEye').textContent = pwdVisible ? '🙈':'👁️';
+}
+function showSignup(){ document.getElementById('loginForm').style.display='none'; document.getElementById('signupForm').style.display='block'; }
+function showLogin(){ document.getElementById('signupForm').style.display='none'; document.getElementById('loginForm').style.display='block'; }
+function socialLogin(p){ alert('Continuing with '+p+'... (demo)'); }
+</script>
+</body>
+</html>

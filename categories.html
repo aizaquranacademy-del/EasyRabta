@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+<title>All Categories — Easyraabta.com</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" style="font-size:24px;color:var(--text);">←</a>
+    <div style="flex:1;text-align:center;font-family:'Baloo Bhai 2',cursive;font-size:18px;font-weight:700;">All Categories</div>
+    <div style="width:40px;"></div>
+  </div>
+</nav>
+
+<div style="padding:12px;margin-bottom:60px;">
+  <!-- MAIN CATEGORIES -->
+  <div id="catList"></div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    Home
+  </a>
+  <a href="listings.html" class="active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Browse
+  </a>
+  <div class="sell-btn-nav">
+    <a href="post-ad.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Sell
+    </a>
+  </div>
+  <a href="chat.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Chats
+  </a>
+  <a href="profile.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Account
+  </a>
+</nav>
+
+<script>
+const CATS = [
+  { name:'Mobiles & Tablets', emoji:'📱', color:'#e3f2fd', sub:['Mobile Phones','Tablets','Accessories','Smart Watches','Landline Phones'], cat:'mobiles' },
+  { name:'Vehicles', emoji:'🚗', color:'#fff3e0', sub:['Cars','Motorcycles','Rickshaw & Chingchi','Buses & Trucks','Spare Parts','Car Accessories'], cat:'vehicles' },
+  { name:'Property', emoji:'🏠', color:'#e8f5e9', sub:['Houses for Sale','Flats & Apartments','Plots & Land','Shops & Offices','Property for Rent'], cat:'property' },
+  { name:'Electronics', emoji:'💻', color:'#f3e5f5', sub:['Computers & Laptops','TVs & Accessories','ACs & Coolers','Fridges & Freezers','Generators & UPS'], cat:'electronics' },
+  { name:'Bikes', emoji:'🏍️', color:'#fff8e1', sub:['Motorcycles','Bicycles','Scooters','Spare Parts','Accessories'], cat:'bikes' },
+  { name:'Fashion', emoji:'👗', color:'#fce4ec', sub:["Women's Clothing",'Men\'s Clothing','Kids Fashion','Shoes','Bags & Accessories'], cat:'fashion' },
+  { name:'Jobs', emoji:'💼', color:'#e0f7fa', sub:['IT & Networking','Sales & Marketing','Driver Jobs','Teaching','Construction'], cat:'jobs' },
+  { name:'Services', emoji:'🛠️', color:'#f9fbe7', sub:['Plumber','Electrician','AC Repair','Movers & Packers','Web Dev'], cat:'services' },
+  { name:'Animals', emoji:'🐄', color:'#efebe9', sub:['Cattle','Poultry','Pets','Birds','Fish'], cat:'animals' },
+  { name:'Agriculture', emoji:'🌾', color:'#f1f8e9', sub:['Crops & Seeds','Farm Tools','Tractors','Fertilizers'], cat:'agriculture' },
+  { name:'Home & Garden', emoji:'🏡', color:'#e8eaf6', sub:['Furniture','Home Decor','Garden','Kitchen','Lighting'], cat:'home' },
+  { name:'Kids & Baby', emoji:'👶', color:'#fce4ec', sub:['Toys','Baby Gear','Clothing','Books','School'], cat:'kids' },
+];
+
+document.getElementById('catList').innerHTML = CATS.map(c=>`
+  <div style="background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden;">
+    <a href="listings.html?cat=${c.cat}" style="display:flex;align-items:center;gap:12px;padding:14px 16px;color:var(--text);">
+      <div style="width:44px;height:44px;border-radius:50%;background:${c.color};display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">${c.emoji}</div>
+      <div style="flex:1;">
+        <div style="font-weight:700;font-size:15px;">${c.name}</div>
+        <div style="font-size:12px;color:var(--text-muted);">${c.sub.length} sub-categories</div>
+      </div>
+      <div style="font-size:18px;color:var(--text-muted);">›</div>
+    </a>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 12px;border-top:1px solid var(--border);padding-top:10px;">
+      ${c.sub.map(s=>`<a href="listings.html?cat=${c.cat}&sub=${encodeURIComponent(s)}" style="font-size:12px;font-weight:600;padding:5px 12px;border-radius:99px;border:1px solid var(--border);background:var(--bg);color:var(--text);">${s}</a>`).join('')}
+    </div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>
